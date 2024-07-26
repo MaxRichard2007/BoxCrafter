@@ -28,6 +28,7 @@ const createBox = () => {
   topElement.innerHTML = `hello`;
   topElement.setAttribute("draggable", "true");
 
+  // Function to create new topElement inside mainBox
   const create = () => {
     const newTopElement = document.createElement("div");
     newTopElement.classList.add("topElement");
@@ -45,23 +46,27 @@ const createBox = () => {
     mainBox.appendChild(newTopElement);
   };
 
+  // Function to remove the mainBox
   const removeElement = () => {
-    mainBox.remove();
+    box.remove();
   };
 
   const downElement = document.createElement("div");
   downElement.classList.add("downElement");
   downElement.innerHTML = `
-    <i class="fa-solid fa-plus button createElement" onclick="create()"></i> 
-    <i class="fa-solid fa-trash button removeElement" onclick="removeElement()"></i>
+    <i class="fa-solid fa-plus button createElement"></i> 
+    <i class="fa-solid fa-trash button removeElement"></i>
   `;
+
+  downElement.querySelector('.createElement').addEventListener('click', create);
+  downElement.querySelector('.removeElement').addEventListener('click', removeElement);
 
   mainBox.appendChild(topElement);
   box.appendChild(mainBox);
   box.appendChild(downElement);
   boxes.appendChild(box);
 
-  // Drag And Drop
+  // Drag and Drop functionality
   topElement.addEventListener("dragstart", () => {
     topElement.classList.add("dragging");
   });
